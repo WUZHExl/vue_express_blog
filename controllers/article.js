@@ -1,6 +1,8 @@
 // 引入admin表的model
 const ArticleModel = require ('../model/articleDb');
-const Token= require('./token.js')
+const CateModel = require ('../model/cateDb');
+// const Token= require('./token.js')
+const sequelize = require('../config/db')
 
 
 function getArticle(req,res){
@@ -28,45 +30,80 @@ function info(req,res){
   // res.send('2222')
 }
 
-function addArticle(req,res){
+async function addArticle(req,res){
    
   // console.log(req.body)
-  ArticleModel.create(req.body)
-  .then(function(result){
-    console.log(result);
-    res.send('成功添加文章')
-  })
-  .catch(function(err){
-    console.log(err);
-    res.send('添加文章失败')
-  })
+  const t = await sequelize.transaction();
+  try {
 
-  // Token.verifyToken(req.headers.authorization)
-  // .then(res => {
-  //   next()
-  //   res.send('这是添加文章的响应')
-  // }).catch(e => {
-  //   res.status(401).send('invalid token')
-  // })
+    // Then, we do some calls passing this transaction as an option:
+    const article = await ArticleModel.create(req.body, { transaction: t });
+    let {cate}=req.body;
+    cate=cate.split(',')
+
+    const cateLists=await CateModel.findAll({'order':[ ["id"]]}, { transaction: t })
+    // console.log(cate);
+    let cateList=[]
+    // console.log(cateLists)
+    for(let key in cateLists){
+      cateList.push(cateLists[key].dataValues.name)
+    }
+    // console.log(cateList)
+    cate=cate.filter(item=>{
+      return !cateList.includes(item)
+    })
+
+    if(cate!==['']){
+      for(let c of cate){
+        await CateModel.create({name:c}, { transaction: t })
+      }
+    }
+    // console.log(cate);  
+    await t.commit();
+    res.send('成功添加文章')
+  
+  } catch (error) {
+    await t.rollback();  
+    res.send('添加文章失败')
+  }
 
 }
 
-function updateArticle(req,res){
+async function updateArticle(req,res){
 
-  ArticleModel.update(req.body,{
-    where:{
-      id:req.body.id
+  const t = await sequelize.transaction();
+  try {
+
+    // Then, we do some calls passing this transaction as an option:
+    const article = await ArticleModel.update(req.body,{where:{id:req.body.id}} ,{ transaction: t });
+    let {cate}=req.body;
+    cate=cate.split(',')
+
+    const cateLists=await CateModel.findAll({'order':[ ["id"]]}, { transaction: t })
+    // console.log(cate);
+    let cateList=[]
+    // console.log(cateLists)
+    for(let key in cateLists){
+      cateList.push(cateLists[key].dataValues.name)
     }
-  })
-  .then(function(result){
-    console.log('成功更新文章');
-    res.send('成功更新文章')
-  })
-  .catch(function(err){
-    console.log(err);
-    res.send('更新文章失败')
-  })
+    // console.log(cateList)
+    cate=cate.filter(item=>{
+      return !cateList.includes(item)
+    })
 
+    if(cate!==['']){
+      for(let c of cate){
+        await CateModel.create({name:c}, { transaction: t })
+      }
+    }
+    // console.log(cate);  
+    await t.commit();
+    res.send('成功更新文章')
+  
+  } catch (error) {
+    await t.rollback();  
+    res.send('更新文章失败')
+  }
 
 }
 

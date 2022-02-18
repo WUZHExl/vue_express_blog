@@ -40,7 +40,7 @@
               response =>{
               // console.log(response.data)
               let temp=response.data.filter(item=>{
-                  return item.cate.indexOf(name)!==-1
+                  return item.cate.split(',').indexOf(name)!==-1
               })
               article.splice(0,article.length,...temp)
               article=article.reverse()

@@ -149,7 +149,7 @@ export default {
         }
         // console.log(newArticle)
         const res=await proxy.$axios.post('/api/article',newArticle)
-        // console.log(res)
+        console.log(res)
 
         if(res.status!==200) {
           proxy.$message.error('添加文章失败');

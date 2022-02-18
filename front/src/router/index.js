@@ -47,7 +47,9 @@ router.beforeEach((to,from,next)=>{
   // from:代表从哪来
   // next()函数，放行；  next('/login')强制跳转
     let id=to.params.id;
-    if(to.path==='/login'||to.path==='/'||to.path===`/article/${id}`||to.path==='/about'|| to.path==='/article') return next()
+    let name = to.params.name
+    if(to.path==='/login'||to.path==='/'||to.path===`/article/${id}`||
+    to.path==='/about'|| to.path==='/article' || to.path===`/cateArticle/${name}`) return next()
     //获取token
     const tokenStr=sessionStorage.getItem('token')
     if(!tokenStr) return next('/login')

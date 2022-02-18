@@ -21,7 +21,7 @@
          <el-col :span="3">
            <a @click="showCateArticle(item.name)"><span>查看</span></a>
            <a @click="showEditCate(item)"><span>修改</span></a>
-           <a @click="deleteCate(item.id)"><span>删除</span></a>
+           <a @click="deleteCate(item)"><span>删除</span></a>
          </el-col>
       </el-row>
     </el-card>
@@ -106,6 +106,7 @@ export default {
               proxy.$axios.put('/api/cate',{
                 id:item.id,
                 name:res.value,
+                prename:item.name
               }).then(
                 response=>{
                    proxy.$message.success('修改成功')
@@ -117,11 +118,12 @@ export default {
           }
         }
 
-        async function deleteCate(id){
+        async function deleteCate(item){
           if(confirm('Are you sure you want to delete this cate?')){
             let res=await proxy.$axios.delete('/api/cate', {
               data:{
-              id: id
+              id: item.id,
+              name:item.name
               }
             })
             if(res.status!==200) {
