@@ -63,6 +63,9 @@
     width: 75%;
     float: right;
     background: white;
+    .article_wrap {
+      padding: 40px 20px 0px 20px;
+    }
 
     .article_detail_title {
       cursor: default;
@@ -77,6 +80,29 @@
 
     .content_dir{
       text-align: left !important;
+    }
+
+
+    .article_title {
+      display: inline-block;
+      color: #222;
+      font-size: 34px;
+      font-weight: 600;
+      border-bottom: 1px solid white;
+      cursor: pointer;
+      &:hover{
+        border-bottom: 1px solid #222;
+      }
+    }
+
+    .article_info {
+      color: #999;
+      font-size: 14px;
+      padding-top: 8px;
+    }
+
+    .tag_margin {
+      margin: 3px;
     }
 
 

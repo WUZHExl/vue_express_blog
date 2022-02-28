@@ -17,7 +17,7 @@
           </li>
         </router-link>
         <li class="nav">
-            <span>专栏</span>
+            <span>分类</span>
         </li>
         <ul>
             <li v-for="item in cateName" class="childList" @click="showCateArticle(item.name)">{{item.name}}</li>
@@ -26,28 +26,63 @@
       </ul>
     </nav>
     <div class="info">
-      <img src="../assets/head.jpg" alt="head">
+      <img src="../assets/header.jpg" alt="head">
       <div class="info_name">Arz</div>
       <div class="archive">
         <ul>
           <router-link to='/'>
             <li>
               <span class="archive_count">{{articleNumber}}</span>
-              <span class="archive_name">日志</span>
+              <span class="archive_name">文章</span>
             </li>
           </router-link>
         </ul>
       </div>
       <ul class="communication">
         <li class="communication_item">
-          <a href="#">
-            <span>Email</span>
-          </a>
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="553531290@qq.com"
+          placement="top"
+        >
+          <span>Email</span>
+        </el-tooltip>
         </li>
         <li class="communication_item">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            content="https://github.com/WUZHExl"
+            placement="top"
+          >
           <a href="https://github.com/WUZHExl" target="_blank">
             <span>GitHub</span>
           </a>
+          </el-tooltip>
+        </li>
+        <li class="communication_item">
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="https://blog.csdn.net/top_xxl_1?type=blog"
+          placement="top"
+        >
+        <a href="https://blog.csdn.net/top_xxl_1?type=blog" target="_blank">
+          <span>CSND</span>
+        </a>
+        </el-tooltip>
+        </li>
+
+        <li class="communication_item">
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="wz394319"
+          placement="top"
+        >
+          <span>WeChat</span>
+        </el-tooltip>
         </li>
       </ul>
     </div>
@@ -155,6 +190,7 @@ export default {
       img {
         width: 120px;
         height: 120px;
+        border-radius: 50%;
       }
     }
 
@@ -198,6 +234,8 @@ export default {
       display: none;
     }
   }
+
+
 
 
 

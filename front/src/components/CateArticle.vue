@@ -65,6 +65,9 @@
     width: 75%;
     float: right;
     background: white;
+    .article_wrap {
+      padding: 40px 20px 0px 20px;
+    }
 
     .article_detail_title {
       cursor: default;
@@ -90,6 +93,51 @@
     .article_another{
       padding: 40px 0;
     }
+
+    .article_title {
+      display: inline-block;
+      color: #222;
+      font-size: 34px;
+      font-weight: 600;
+      border-bottom: 1px solid white;
+      cursor: pointer;
+      &:hover{
+        border-bottom: 1px solid #222;
+      }
+    }
+
+    .article_info {
+      color: #999;
+      font-size: 14px;
+      padding-top: 8px;
+    }
+
+    .tag_margin {
+      margin: 3px;
+    }
+
+    .article_gist {
+      text-align: left;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      font-size: 16px;
+    }
+
+    .article_button {
+      display: inline-block;
+      padding: 3px 12px;
+      border: 2px solid #222;
+      color: #222;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .article_all:hover {
+      color: white;
+      background: #000;
+      font-weight: 600;
+    }
+
 
 
   }

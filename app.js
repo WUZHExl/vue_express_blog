@@ -1,26 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const Token= require('./controllers/token.js')
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-var articleRouter= require('./routes/article')
-var loginRouter = require('./routes/login')
+const express = require('express')
+const path = require('path')
+
+
 var cateRouter = require('./routes/cate')
+var articleRouter= require('./routes/article')
+var loginRouter= require('./routes/login')
+
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, ''));
+// app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(cookieParser());
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
 // app.use('/', indexRouter);
@@ -46,22 +43,22 @@ app.use(function(err, req, res, next) {
 });
 
 
-//设置允许跨域
+//閻犱礁澧介悿鍡涘礂娴ｇ瓔鍟呴悹鎭掑妼閻擄拷
 // app.use(function(req, res, next) {
-//       //指定允许其他域名访问 *所有
+//       //闁圭ǹ娲ら悾楣冨礂娴ｇ瓔鍟呴柛蹇旀构缁剟宕洪悢閿嬪€抽悹浣告健濡拷 *闁圭鍋撻柡鍫嫹
 //     res.setHeader("Access-Control-Allow-Origin", "*");
-//       //允许客户端请求头中带有的
+//       //闁稿繋娴囬蹇曗偓骞垮灪閸╂稓绮╅婵愬殲婵懓鍊搁妵鏃€绋夐鐐垫暔闁哄牆顦卞▓锟�
 //     res.setHeader("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-//       //允许请求的类型
+//       //闁稿繋娴囬蹇曟嫚闁垮婀撮柣銊ュ鐞氼偊宕归敓锟�
 //     res.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
 //     res.setHeader("X-Powered-By",' 3.2.1')
-//       //让options请求快速返回
+//       //閻犱緤绠皃tions閻犲洭鏀遍惇鎷岀疀椤愶腹鍋撻悢鑽ょ闁搞儻鎷�
 //     if(req.method=="OPTIONS") res.send(200);
 //     else  next();
 // });
 
 
-// 白名单
+// 闁谎嗘閹洟宕￠敓锟�
 // const whiteList = ['/login']
 // ,'/article','/article/:id'
 
