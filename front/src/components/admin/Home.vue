@@ -2,17 +2,19 @@
     <el-container
     class="layout-container-demo"
     >
-        <!-- 头部 -->
-        <el-header>
-          <div>
-            <span>博客管理系统</span>
-          </div>
-          <el-button type="info">退出</el-button>
-        </el-header>
+    <!-- 头部 -->
+    <el-header :style="{position: 'fixed', zIndex: 1, width: '100%'}">
+      <div>
+        <span>博客管理系统</span>
+      </div>
+      <el-button type="info"><router-link to="/login">退出</router-link></el-button>
+    </el-header>
 
-    <el-container>
+    <el-container :style="{marginTop:'60px'}">
 
-        <el-aside :width="isCollapse?'64px':'200px'" style="background-color:#333744">
+        <el-aside :width="isCollapse?'64px':'200px'" style="background-color:#333744"
+                  :style="{position: 'fixed',zIndex: 1, weight: '100%'}"
+        >
 
           <div class="toggle-button" @click="toggleCollapse">|||</div>
           <el-menu 
@@ -22,10 +24,6 @@
               :default-active="activePath"
               :collapse="isCollapse"
           >
-              <el-menu-item index="1" @click="Goto('/userManage')">
-                <el-icon><avatar /></el-icon>
-                <template #title>用户管理</template>
-              </el-menu-item>
               <el-menu-item index="2" @click="Goto('/articleManage')">
                 <el-icon><document /></el-icon>
                 <template #title>文章管理</template>
@@ -34,10 +32,14 @@
                 <el-icon><notebook /></el-icon>  
                 <template #title>分类管理</template>
               </el-menu-item>
+              <el-menu-item index="1" @click="Goto('/userManage')">
+                <el-icon><avatar /></el-icon>
+                <template #title>用户管理</template>
+              </el-menu-item>
           </el-menu>
         </el-aside>
 
-        <el-main>
+        <el-main :style="{marginLeft:isCollapse?'64px':'200px'}">
 
           <router-view></router-view>
         </el-main>

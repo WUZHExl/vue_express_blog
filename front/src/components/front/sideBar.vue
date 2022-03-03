@@ -26,7 +26,7 @@
       </ul>
     </nav>
     <div class="info">
-      <img src="../assets/header.jpg" alt="head">
+      <img src="../../assets/header.jpg" alt="head">
       <div class="info_name">Arz</div>
       <div class="archive">
         <ul>

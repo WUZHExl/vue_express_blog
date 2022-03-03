@@ -15,7 +15,7 @@
       <el-row justify="space-between">
          <el-col :span="5" @click="showCateArticle(item.name)"><h1>{{item.name}}</h1>
          </el-col>
-         <el-col :span="5">{{item.createdAt}}</el-col>
+         <el-col :span="4">{{item.createdAt}}</el-col>
       </el-row>
       <el-row justify="end">
          <el-col :span="3">
