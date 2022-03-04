@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from "./store"
 import axios from 'axios'
 // 新增代码：引入全部组件及样式
 // 引入elementplus
@@ -28,7 +29,7 @@ const app=createApp(App)
 
 
 
-app.use(router)
+app.use(router).use(store)
 for (const name in ElIcons){
 	app.component(name,ElIcons[name])
 }

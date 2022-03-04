@@ -1,9 +1,6 @@
 <template>
-      <!-- 导航区 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>分类管理</el-breadcrumb-item>
-    </el-breadcrumb>
+    <!-- 导航区 -->
+    <breadcrumb :name="childProps.name" :path="childProps.path"></breadcrumb>
 
     <el-row class="row-bg">
         <el-col>
@@ -28,14 +25,22 @@
 </template>
 
 <script>
-import {onMounted,getCurrentInstance,reactive} from 'vue'
+import {onMounted,getCurrentInstance,reactive,computed} from 'vue'
 import {useRouter} from 'vue-router'
+import breadcrumb from '../../components/admin/Breadcrumb.vue'
+import {useStore } from 'vuex'
 export default {
 
+      components:{breadcrumb},
       setup(){
           
-        let cateLists =reactive([])  
+        let cateLists =reactive([])
+        let childProps=reactive({
+            path:'/cateManage',
+            name:'分类管理',
+        })  
         const router = useRouter()
+        const store= useStore()
         const { proxy}= getCurrentInstance();
         onMounted(()=>{
           // console.log(proxy.$message)
@@ -43,18 +48,9 @@ export default {
         })
 
         function getAllCateLists() {
-          proxy.$axios.get('/api/cate')
-          .then(
-            response =>{
-              cateLists.splice(0,cateLists.length,...response.data)
-              cateLists=cateLists.reverse()
-              // console.log(cateLists)
-            }
-          )
-          .catch(error =>{
-              console.log(error)}
-          )
+          store.dispatch('getList','cate')
         }
+        cateLists=computed(()=>store.state.cateLists)
 
         function addCate(){
               proxy.$prompt('请输入新的分类', '添加分类', {
@@ -137,6 +133,7 @@ export default {
 
         return{
           cateLists,
+          childProps,
           showEditCate,
           deleteCate,
           addCate,

@@ -18,8 +18,9 @@
 </template>
 
 <script>
-import { reactive,onMounted,getCurrentInstance,toRefs} from 'vue'
+import { reactive,onMounted,getCurrentInstance,toRefs,computed} from 'vue'
 import { useRouter } from 'vue-router'
+import {useStore } from 'vuex'
   export default {
 
     setup(){
@@ -27,23 +28,14 @@ import { useRouter } from 'vue-router'
 
       const { proxy } = getCurrentInstance();
       const router = useRouter()
+      const store = useStore()
       onMounted(()=>{
         // console.log("======onMounted=========");
         // console.log(articleList)
-        proxy.$axios.get('/api/article')
-        .then(
-        response =>{
-          articleList.splice(0,articleList.length,...response.data)
-          // articleList.push(...response.data)
-          //  console.log(articleList)
-          articleList=articleList.reverse()
-          //  console.log(response)
-        }
-        )
-        .catch(error =>{
-          console.log(error)}
-         )
+        store.dispatch('getList','article')
+
       })
+      articleList=computed(()=>store.state.articleList)
 
       function articleDetail(id){
         // console.log(router)

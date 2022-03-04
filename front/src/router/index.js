@@ -12,18 +12,18 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 // import cateArticle from '../components/CateArticle'
 // import userManage from '../components/admin/UserManage'
 
-const sideBar = ()=>import('../components/front/sideBar.vue')
-const article=()=>import('../components/front/Article')
-const about=()=>import('../components/front/About.vue')
-const articleDetail=()=>import('../components/front/ArticleDetail.vue')
-const login=()=>import('../components/Login/Login.vue')
-const Home =()=>import('../components/admin/Home')
-const articleManage=()=>import('../components/admin/ArticleManage')
-const welcome=()=>import('../components/admin/Welcome')
-const articleEdit=()=>import('../components/admin/ArticleEdit')
-const cateManage=()=>import('../components/admin/CateManage')
-const cateArticle=()=>import('../components/front/CateArticle')
-const userManage=()=>import('../components/admin/UserManage')
+const sideBar = ()=>import('../pages/front/sideBar.vue')
+const article=()=>import('../pages/front/Article')
+const about=()=>import('../pages/front/About.vue')
+const articleDetail=()=>import('../pages/front/ArticleDetail.vue')
+const login=()=>import('../pages/Login/Login.vue')
+const Home =()=>import('../pages/admin/Home')
+const articleManage=()=>import('../pages/admin/ArticleManage')
+const welcome=()=>import('../pages/admin/Welcome')
+const articleEdit=()=>import('../pages/admin/ArticleEdit')
+const cateManage=()=>import('../pages/admin/CateManage')
+const cateArticle=()=>import('../pages/front/CateArticle')
+const userManage=()=>import('../pages/admin/UserManage')
 
 const routes = [
   {path:'/',redirect:'/article'},

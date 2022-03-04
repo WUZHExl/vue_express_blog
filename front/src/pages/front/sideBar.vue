@@ -46,7 +46,7 @@
           content="553531290@qq.com"
           placement="top"
         >
-          <span>Email</span>
+        <a><span>Email</span></a> 
         </el-tooltip>
         </li>
         <li class="communication_item">
@@ -65,12 +65,10 @@
         <el-tooltip
           class="box-item"
           effect="dark"
-          content="https://blog.csdn.net/top_xxl_1?type=blog"
+          content="17821255446"
           placement="top"
         >
-        <a href="https://blog.csdn.net/top_xxl_1?type=blog" target="_blank">
-          <span>CSND</span>
-        </a>
+        <a><span>Phone</span></a>
         </el-tooltip>
         </li>
 
@@ -81,7 +79,7 @@
           content="wz394319"
           placement="top"
         >
-          <span>WeChat</span>
+        <a><span>WeChat</span></a>
         </el-tooltip>
         </li>
       </ul>
@@ -90,14 +88,17 @@
 </template>
 
 <script>
-import {ref,reactive,onMounted,getCurrentInstance} from 'vue'
+import {ref,reactive,onMounted,getCurrentInstance,computed} from 'vue'
 import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 export default {
     setup(){
       let articleNumber=ref(0)
       let cateName=reactive([])
       const router = useRouter()
+      const store= useStore()
       const { proxy } = getCurrentInstance();
+      cateName=computed(()=>store.state.cateLists)
       onMounted(()=>{
         // console.log("======onMounted=========");
         // console.log(articleNumber)
@@ -111,18 +112,8 @@ export default {
       })
 
       function getAllCateLists() {
-          proxy.$axios.get('/api/cate')
-          .then(
-            response =>{
-              cateName.splice(0,cateName.length,...response.data)
-              cateName=cateName.reverse()
-              // console.log(cateLists)
-            }
-          )
-          .catch(error =>{
-              console.log(error)}
-          )
-      
+
+        store.dispatch('getList','cate')
       
       }
 

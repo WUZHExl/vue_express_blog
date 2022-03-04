@@ -1,9 +1,6 @@
 <template>
     <!-- 导航区 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>文章管理</el-breadcrumb-item>
-    </el-breadcrumb>
+    <breadcrumb :name="childProps.name" :path="childProps.path"></breadcrumb>
 
     <el-row class="row-bg">
         <el-col>
@@ -29,32 +26,30 @@
 </template>
 
 <script>
-import { reactive,onMounted,getCurrentInstance,toRefs} from 'vue'
+import { reactive,onMounted,getCurrentInstance,toRefs,computed} from 'vue'
 import { useRouter } from 'vue-router'
+import breadcrumb from '../../components/admin/Breadcrumb.vue'
+import {useStore } from 'vuex'
 export default {
 
-
+      components:{breadcrumb},
       setup(){
           let articleList=reactive([])
+          let childProps=reactive({
+            path:'/articleManage',
+            name:'文章管理',
+          })
           const router=useRouter()
+          const store= useStore()
           const { proxy } = getCurrentInstance();
           onMounted(()=>{
               getALLArticle()
           })
 
           function getALLArticle(){
-            proxy.$axios.get('/api/article')
-              .then(
-              response =>{
-                articleList.splice(0,articleList.length,...response.data)
-                articleList=articleList.reverse()
-                // console.log(articleList)
-              }
-              )
-              .catch(error =>{
-                  console.log(error)}
-              )
+              store.dispatch('getList','article')
           }
+          articleList=computed(()=>store.state.articleList)
 
           function showEditArticle(id){
             if(id){
@@ -90,6 +85,7 @@ export default {
 
           return{
             articleList,
+            childProps,
             showEditArticle,
             showArticleDetail,
             deleteArticle,
