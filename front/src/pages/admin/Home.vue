@@ -7,7 +7,7 @@
       <div>
         <span>博客管理系统</span>
       </div>
-      <el-button type="info"><router-link to="/login">退出</router-link></el-button>
+      <el-button type="info" @click="layout">退出</el-button>
     </el-header>
 
     <el-container :style="{marginTop:'60px'}">
@@ -66,18 +66,15 @@ export default {
             onMounted(()=>{
 
                 router.push('/welcome')
-                // proxy.$axios.get('/api/test/')
-                //   .then((result)=>{
-                //       console.log(result)
-                //   }
-                // )
-                // .catch(
-                //   (error)=>{console.log(error)}
-                // )
             })
 
             let Goto=function(path){
                router.push(path)
+            }
+
+            let layout=()=>{
+              window.sessionStorage.removeItem('token')
+              router.push('/login')
             }
 
             function toggleCollapse(){
@@ -88,6 +85,7 @@ export default {
               ...toRefs(useData),
               Goto,
               toggleCollapse,
+              layout
             }
 
 
